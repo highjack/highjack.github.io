@@ -1,6 +1,7 @@
 ---
 layout: post
 title: HTB - Solidstate write up
+tag: ctf
 ---
 This box was fairly easy but it had a new technology I’ve never heard of before called “Apache James”.
 
