@@ -1,4 +1,25 @@
 ---
+table {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+}
+
+td, th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  padding: 5px;
+}
+
+ thead {
+  background-color: #000000;
+  color:#ffffff;
+}
 ---
 
 //
