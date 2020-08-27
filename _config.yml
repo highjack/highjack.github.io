@@ -9,7 +9,7 @@ name: highjack
 description: Web Developer from Somewhere
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://github.com/highjack/highjack.github.io/blob/master/images/zombie.png
+avatar: https://raw.githubusercontent.com/highjack/highjack.github.io/master/images/zombie.png
 
 #
 # Flags below are optional
