@@ -9,6 +9,9 @@
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
+/**************/
+/* BASE RULES */
+/**************/
 table {
   width: 100%;
   background-color: #FFFFFF;
@@ -30,10 +33,6 @@ td, th {
   background-color: #000000;
   color:#ffffff;
 }
-
-/**************/
-/* BASE RULES */
-/**************/
 
 html {
   font-size: 100%;
