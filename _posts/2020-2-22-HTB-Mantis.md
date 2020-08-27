@@ -1,6 +1,7 @@
 ---
 layout: post
 title: HTB - Mantis write up
+tag: ctf
 ---
 
 Hey guys, so today I’m going to walk you through how I solved the Mantis box on hackthebox.org, it starts the same way most network pentests do, with an nmap scan…
