@@ -26,7 +26,7 @@ description: >- # used by seo meta and the atom feed
 url: ""
 
 github:
-  username: highjack # change to your github username
+  username: highjack/public # change to your github username
 
 twitter:
   username: hiighjack # change to your twitter username
