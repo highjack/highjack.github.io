@@ -69,6 +69,7 @@ We compile this with: **gcc -fPIC -static -shared -o bind.so bind.c -lc –ldl**
 ![lbdpreload-bind.png](/assets/img/wopr/lbdpreload-bind.png)
 
 Let's set up LD_PRELOAD and give it a try:
+
 ![run-ldpreload.png](/assets/img/wopr/run-ldpreload.png)
 
 If you're following along at home the LD_PRELOAD command is **export LD_PRELOAD=/tmp/exploit/bind.so**. Now we can debug this thing properly lets open another SSH session and see if we can overwrite EIP. We start by getting wopr's process id using **ps aux | grep wopr** – you can ignore the “defunct” processes these are processes that I have crashed and entered into a zombie state.
