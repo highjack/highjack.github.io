@@ -24,7 +24,7 @@ A few are note worthy areas are listed below:
 - Source code review for a bunch of languages such as: .NET, Go, python, javascript, C and Erlang.
 - network pentesting and assumed breach scenarios  
 
-All these years later, this is still not "just a job" and I constantly strive to learn more, 95% of my learning takes place outside of work whether its from playing in a lab, reading articles, contributing to bug bounty programs or just taking something a part to see what it does. I am driven and I want to be the best I can possibly be, if I woke up tomorrow and being a professional security d00d was no longer an option, absolutely nothing will change. 
+All these years later, this is still not "just a job" and I constantly strive to learn more, 95% of my learning takes place outside of work whether its from playing in a lab, reading articles, contributing to bug bounty programs (I don't mind recon but I am more of a deep dive kinda guy) or just taking something a part to see what it does. I am driven and I want to be the best I can possibly be, if I woke up tomorrow and being a professional security d00d was no longer an option, absolutely nothing will change. 
 
 This site is pretty much just somewhere to dump notes and prove to people that I actually exist... hopefully something on here is useful to atleast one person, even if that's just to future me :) 
 
