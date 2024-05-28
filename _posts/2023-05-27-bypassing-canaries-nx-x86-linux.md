@@ -19,10 +19,10 @@ Let's disassemble the application and take a peek, launch **gdb /usr/local/bin/w
 Let’s take a look at get_reply as well using **disas get_reply**.
 ![disas_get_reply2.png](/assets/img/wopr/disas_get_reply2.png)
 
-Looking at the disassembly of get_reply and using Microsoft’s security development life cycle article as a [reference](http://msdn.microsoft.com/en-us/library/bb288454.aspx) I noticed the call to memcpy which has been classified as a “banned memory copy function”, well this looks promising :)
+Looking at the disassembly of get_reply and using Microsoft’s security development life cycle article as a [reference](https://msdn.microsoft.com/en-us/library/bb288454.aspx) I noticed the call to memcpy which has been classified as a “banned memory copy function”, well this looks promising :)
 ![wopr-banned-func.png](/assets/img/wopr/wopr-banned-func.png)
 
-So, we know where the issue should be, let’s take a quick look at the stack canary, after a bunch of research on the I found an article on [phrack](http://phrack.org/issues/67/13.html) to quote the paper “How do those canaries work? At the time of creating the stack frame, the so-called canary is added. This is a random number. When a hacker triggers a stack overflow bug, before overwriting the metadata stored on the stack he has to overwrite the canary. When the epilogue is called (which removes the stack frame) **the original canary value (stored in the TLS, referred by the gs segment selector on x86)** is compared to the value on the stack. If these values are different SSP (stack smashing protection) writes a message about the attack in the system logs and terminate the program“. This provided us with a clue if we encountered the “gs” register as to what was going on.
+So, we know where the issue should be, let’s take a quick look at the stack canary, after a bunch of research on the I found an article on [phrack](https://phrack.org/issues/67/13.html) to quote the paper “How do those canaries work? At the time of creating the stack frame, the so-called canary is added. This is a random number. When a hacker triggers a stack overflow bug, before overwriting the metadata stored on the stack he has to overwrite the canary. When the epilogue is called (which removes the stack frame) **the original canary value (stored in the TLS, referred by the gs segment selector on x86)** is compared to the value on the stack. If these values are different SSP (stack smashing protection) writes a message about the attack in the system logs and terminate the program“. This provided us with a clue if we encountered the “gs” register as to what was going on.
 
 This can be seen in the disassembly below:
 ![disa-get_reply.png](/assets/img/wopr/disa-get_reply.png)
@@ -81,7 +81,7 @@ Let's take a quick look at what a stack canary is, it's basically a barrier put 
 
 Our payload will begin in the local variables section and overflow it’s way to EIP. In terms of the diagram, what we need to do is to sneak past the stack canary and EBP to get to the little hammer (EIP) to cause epic pwnage. 
 
-How can we do this without being jumped on by a giant angry turtle I hear you say? Well what we do is a use a technique created by Ben Hawkes mentioned on [phrack 67](http://phrack.org/issues/67/13.html) his idea was to brute force the stack canary one byte at a time. How this works is: we send a string of A's, one A at a time until we trigger the stack smashing protection (SSP) which means the first byte of our canary was overwritten – this gives us the offset of the canary. Now we send our payload that looks like something like this:
+How can we do this without being jumped on by a giant angry turtle I hear you say? Well what we do is a use a technique created by Ben Hawkes mentioned on [phrack 67](https://phrack.org/issues/67/13.html) his idea was to brute force the stack canary one byte at a time. How this works is: we send a string of A's, one A at a time until we trigger the stack smashing protection (SSP) which means the first byte of our canary was overwritten – this gives us the offset of the canary. Now we send our payload that looks like something like this:
 
 ```
 [A*CANARY-OFFSET][CANARY BYTE 1 GUESS]
