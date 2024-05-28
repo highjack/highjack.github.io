@@ -4,14 +4,30 @@ icon: fas fa-info-circle
 order: 3
 ---
 
-Hey, my name is Ben, also known as “highjack” online. I’ve been interested in computers since the age of 6 when my parents brought me an Amiga 500. I like to break things, it’s not a hobby, it’s a passion, it’s what I do inside and outside of work and I can’t see that ever changing. I’m addicted to hacking. I can’t stop myself but to prod and poke things, figure out how they work and then try and get them to do stuff they aren’t meant to do.
+Yo, my name is highjack, or "Ben" in the meatspace. I’ve been interested in computers since the age of 6 when my parents bought me an Amiga 500 with a bunch of educational games, to "help me with my school work", or atleast that was the plan... 
 
-I specialise in testing web apps which stems from the first scripting language I ever properly learnt which was PHP. After Uni I worked as a PHP developer for a couple of years but security has always been my where my heart it. So the obvious path for me was to learn about web app security.
+When I got abit older my mum bought home her password protected Windows 95 work laptop. I was very curious about it but my mum did not want to share the password, so imagine my amazement when I found out I could just hit ESC to bypass the login. 
 
-I also venture off into many other areas of security. I like playing with exploit development, I can manage stack based buffer overflows, format string issues and have built a few ROP chains but I still struggle with heap overflows. I’m not the best reverse engineer but I will give it a good go and I’d say I’m medicore at “traditional” network pentesting/red teaming, I certainly know enough to get by, meaning I’m probably on par with some of the APT groups but I think the “Advanced” part of the acronym is often debatable based on some of the write ups I’ve read. I mean I get it, if there is a super easy way to get a shell why would you bother with anything else. Not that I condone that sort of behavior ;)
+A couple of years passed by and we finally got 56k dial up internet. My parents were very responsible and they wanted to limit my access to adult material. Unfortunately for them this was just another push for me to become a hacker. I researched the software, I researched how it stored its keys and I cracked the password using John the Ripper. Probably no one will believe me but the only reason was because I didn't want to be told what to do. 
 
-I’ve been trying to get into bug bounties recently but my free time is quite limited out of work if I find anything cool I will post it. Don’t worry I won’t be posting poor quality write ups just to show you how much money I’ve made. I’m trying to shoe horn some automated recon system using kubernetes currenly and when it is in some kind of operational order I will share it online. I don’t mind recon, but I’m more of a deep dive kind of guy.
+I spent a bunch of my time on Yahoo chat rooms and met some people who told me about Netbus and Sub7. Back then people would just port scan the whole of the AOL IP range and find preinfected machines, connect with the sub7 client and use the built in chat to talk to other script kiddies :D The novelty of this wore off pretty fast, as you'd imagine in a world where barely anyone has AV or firewalls and those that did could be killed off pretty easily by just terminating a process, it just wasn't very challenging. I wanted more..
 
-My blog just contains a few old CTF write ups for now but I plan on working on it, to include many of the topics that I am interested in. There’s some links to some old vulnerabilities I have reported too, I haven’t done this in a good while, a certain company that I won’t name threatened me to throw me in jail for writing a blog post (after a fix was available) because they wanted to silently patch it and not make the customer’s aware of the issue.
+Poking around the internet lead me to sites like Astalavista, New Order, milw0rm and Phrack, I used these to learn more. When I started College at age 16, my friend convinced me to install Slackware on an old laptop, I used to have it hooked up to the phone line and would connect to IRC servers like dal.net, tddirc and efnet. Times were much different back then, people would share web server 0days and remote file inclusion vulnerabilities in government websites, just to have bragging rights.
 
-I’m not doing this for money or fame, it’s mostly just a scratch pad for me to dump my findings on but if even just one person out there learns something from my content then that’s an added bonus.
+I saw a bunch of people exploting websites with bugs like SQL injection, LFIs and RFIs and I wanted to be able to do that... I wanted to understand how software worked and make it do stuff it wasn't supposed to. I decided to sit down and teach myself PHP, at this point getting paid to hack was completely unheard of but it didn't matter I was completely obessed with it. I figured atleast I'd have a fall back and I could become a web developer as a job.
+
+Alot of my friends were avid C programmers and we spent alot of time playing CTFs like Smashthestack which was really fun. After a few I finished Uni and became a PHP developer. I had heard of ethical hackers at this point but I assumed you would need some god like skill to get a job like that. Fortunately I was able to secure a junior role on an internal security team, I specialised in hacking websites but this very quickly expanded to mobile and I learnt alot about code review. Since then I have done  many different things and I am grateful for the experience. 
+
+A few are note worthy areas are listed below:
+- reverse engineering obfuscated code and malware (using IDA, Olly, Reflector/dnspy, jd-gui, Wireshark etc). 
+- finding vulnerabilities and building exploits for in both internally developed, third party apps, appliances and even some hardware devices.
+- Source code review for a bunch of languages such as: .NET, Go, python, javascript, C and Erlang.
+- network pentesting and assumed breach scenarios  
+
+All these years later, this is still not "just a job" and I constantly strive to learn more, 95% of my learning takes place outside of work whether its from playing in a lab, reading articles, contributing to bug bounty programs or just taking something a part to see what it does. I am driven and I want to be the best I can possibly be, if I woke up tomorrow and being a professional security d00d was no longer an option, absolutely nothing will change. 
+
+This site is pretty much just somewhere to dump notes and prove to people that I actually exist... hopefully something on here is useful to atleast one person, even if that's just to future me :) 
+
+I'm not perfect so if you have any corrections that you think I should make feel free to @ me on twitter.
+
+Cheers
