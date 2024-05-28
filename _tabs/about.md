@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
+order: 3
 ---
 
 Hey, my name is Ben, also known as “highjack” online. I’ve been interested in computers since the age of 6 when my parents brought me an Amiga 500. I like to break things, it’s not a hobby, it’s a passion, it’s what I do inside and outside of work and I can’t see that ever changing. I’m addicted to hacking. I can’t stop myself but to prod and poke things, figure out how they work and then try and get them to do stuff they aren’t meant to do.
