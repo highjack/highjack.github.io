@@ -1,6 +1,6 @@
 ---
 title: Bypassing Stack Canaries and Non Executable Stack on x86 Linux
-date: 2023-05-27 21:13:06
+date: 2024-05-27 21:13:06
 categories: [EXPLOIT_DEV]
 tags: [exploit_dev]     # TAG names should always be lowercase
 ---
