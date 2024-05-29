@@ -285,7 +285,7 @@ allow us to run commands e.g. system(“whoami).
 If we implement this it will look as follows:
 ```[A*30][4 Byte Canary][4 Byte EBP][EIP → Address of System()
 Function][JUNK][Address of App To Launch].
-````
+```
 
 First of all we need the address of system – we can get this from GDB using *print* system
 
