@@ -4,7 +4,7 @@ date: 2024-05-27 21:13:06
 categories: [EXPLOIT_DEV]
 tags: [exploit_dev]     # TAG names should always be lowercase
 ---
-For this blog post we will be exploiting a 32bit Linux binary called wopr, yup that's a wargames reference from a CTF Challenge called Persistence. 
+For this blog post we will be exploiting a 32bit Linux binary called wopr, yup that's a wargames reference from a CTF challenge called Persistence. 
 
 ![checksec](/assets/img/wopr/checksec-wopr.png)
 
@@ -281,12 +281,12 @@ stack. This means we can’t execute our shell code directly from the stack, luc
 pretty straight forward to bypass this protection using ret2libc. Instead of JMPing to our
 shell code, we jump to the libc address for a function of our choosing and set the stack up
 in advanced so that we can provide input to it. We will select the system() function as it will
-allow us to run commands e.g. system(“whoami).
+allow us to run commands e.g. system(“whoami").
 
 If we implement this it will look as follows:
 ```
 [Ax30][4 Byte Canary][4 Byte EBP][EIP → Address of System()
-[Function][JUNK][Address of App To Launch].
+[Function][JUNK][Address of App To Launch]
 ```
 
 First of all we need the address of system – we can get this from GDB using *print* system
