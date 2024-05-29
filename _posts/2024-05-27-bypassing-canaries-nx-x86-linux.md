@@ -6,13 +6,15 @@ tags: [exploit_dev]     # TAG names should always be lowercase
 ---
 For this blog post we will be exploiting a 32bit Linux binary called wopr, yup that's a wargames reference from a CTF challenge called Persistence. 
 
-![checksec](/assets/img/wopr/checksec-wopr.png)
+
 
 First things first let's double check the binary protections, as you can see **checksec** has found that stack canaries and NX (Non Executable Stack) are both set.
 
-![aslr](/assets/img/wopr/wopr-alsr.png)
+![checksec](/assets/img/wopr/checksec-wopr.png)
 
 As we are exploiting this directly from the CTF machine, I checked the ASLR status for the box with cat **/proc/sys/kernel/randomize_va_space** zero indicates it’s off, good news for us :)
+
+![aslr](/assets/img/wopr/wopr-alsr.png)
 
 Let's disassemble the application and take a peek, launch **gdb /usr/local/bin/wopr**. At the GDB prompt I set the disassembly flavour to Intel syntax as I find it easier to read, the command is **set disassembly-flavor intel**. I have then issued **disas main** to disassemble the main function, my reverse engineering skills are limited so I find the easiest way to get a very high level idea of how an application works is to look at the call instructions, we can see which functions are called and if necessary examine any interesting logic between the calls to c functions that commonly have memory corruption issues, I have removed everything but the calls from the output to make it clearer, by googling the get_reply function highlighted in red, we can determine that this is a custom function.
 
