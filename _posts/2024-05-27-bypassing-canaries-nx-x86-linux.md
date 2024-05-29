@@ -95,6 +95,7 @@ How can we do this without being jumped on by a giant angry turtle I hear you sa
 ```
 [A*CANARY-OFFSET][CANARY BYTE 1 GUESS]
 ```
+
 We send every possible combination 0x00 through to 0xff as our guess until we no longer receive the SSP error – this means we have determined the value of the first byte. We save this canary byte and move onto the next. i.e.  ```[A*CANARY-OFFSET][DISCOVERED CANARY BYTE][CANARY BYTE 2 GUESS]``` until we have discovered the whole canary. This reduces the possibilities from 255*255*255*255 (4228250625) combinations to 4*256 which is 1024. As you can see we drastically reduced the possibilities and amount of time it will take to perform this brute force.
 
 You might ask yourself; doesn't the stack canary change every time we run the application? Yep it does but as wopr uses fork() when it receives a connection the stack canary is the same as the main process, from the man page “fork() creates a new process by duplicating the calling process. The new process, referred to as **the child, is an exact duplicate of the calling process**” therefore it is possible to brute force the canary until we have it.
