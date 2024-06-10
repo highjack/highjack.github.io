@@ -2,7 +2,7 @@
 title: Bypassing Stack Canaries and Non Executable Stack on x86 Linux
 date: 2024-05-27 21:13:06
 categories: [EXPLOIT_DEV]
-tags: [exploit_dev]     # TAG names should always be lowercase
+tags: ["exploit dev", "reversing"]     # TAG names should always be lowercase
 ---
 For this blog post we will be exploiting a 32bit Linux binary called wopr, yup that's a wargames reference from a CTF challenge called Persistence. 
 
