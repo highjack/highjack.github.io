@@ -2,6 +2,7 @@
 # the default layout is 'page'
 icon: fas fa-info-circle
 order: 3
+layout: page
 ---
 
 Yo, my name is highjack, or "Ben" in the meatspace. I’ve been interested in computers since the age of 6 when my parents bought me an Amiga 500 with a bunch of educational games, to "help me with my school work", or atleast that was the plan... 
