@@ -6,8 +6,6 @@ tags: ["exploit dev", "reversing"]     # TAG names should always be lowercase
 ---
 For this blog post we will be exploiting a 32bit Linux binary called wopr, yup that's a wargames reference from a CTF challenge called Persistence. 
 
-
-
 First things first let's double check the binary protections, as you can see **checksec** has found that stack canaries and NX (Non Executable Stack) are both set.
 
 ![checksec](/assets/img/wopr/checksec-wopr.png)
