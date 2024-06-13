@@ -1,8 +1,8 @@
 ---
 title: Crack the Window 32bit reversing and exploit dev
-date: 2024-06-13 21:34:36
+date: 2024-05-27 21:13:06
 categories: [EXPLOIT_DEV]
-tags: ["exploit dev", "reversing"]     
+tags: ["exploit dev", "reversing"]     # TAG names should always be lowercase  
 ---
 
 ## Intro
