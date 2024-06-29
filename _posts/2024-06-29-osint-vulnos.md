@@ -1,5 +1,5 @@
 ---
-title: OSINT - VUlnOS
+title: OSINT - VulnOS
 date: 2024-06-29 07:51:06
 categories: [OSINT]
 tags: ["osint"] 
