@@ -67,7 +67,7 @@ I know there was some crazy "phone hacking" scandal a few years back in the UK. 
 
 So I dialed Nikhil's number and hit asterisk and I got an automated message that said "to access your voice mail please enter the 4-digit code".
 
-Well, we came across a couple of theses in our travels, his year of birth (1977) and the date the company was registered (1998). I punched in 1977 and Boom!!! I can hear his voicemail message that says:
+Well, we came across a couple of theses in our travels, his year of birth (1977) and the date the company was registered (1998). I punched in 1977 and BOOM!!! I can hear his voicemail message that says:
 "Hi Nikhil, I'm just calling with the password for the admin portal it's y\*\*\*\*\*\*\*\*\*\*\**e"
 
 It's pretty obvious here that I've overlooked the admin panel, so let's pull out gobuster and do some active subdomain brute-forcing, this tells us that the admin subdomain exists:
